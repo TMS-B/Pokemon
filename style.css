@@ -1,0 +1,75 @@
+body{
+    margin: 0;
+    background-color: #d2232a;
+}
+header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #58595b;
+    color: white;
+    margin: 20px;
+    border-radius: 10px;
+    border: solid 3px black;
+}
+header h1{
+    font-size: 30px;
+    -webkit-text-fill-color: #FFCC00;
+    -webkit-text-stroke: 1px #365CA8;
+    font-weight: bold;
+    font-family: sans-serif;
+    
+}
+header h2 {
+    font-size: 25px;
+    -webkit-text-fill-color: #FFCC00;
+    -webkit-text-stroke: 1px #365CA8;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+header input {
+    margin: 10px;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+    border: solid 3px black;
+}
+input:focus{
+    outline: none;
+}
+main{
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color: white;
+    border: solid 3px black;
+}
+button{
+    display: flex;
+    flex-direction: row;
+    width: 100px;
+    border-radius: 10px;
+    background-color: #58595b;
+    border: solid 3px black;
+    color: white;
+}
+.pokemonRow{
+    display: flex;
+    width: 100%;
+    border-radius: 10px;
+    margin: 20px 0 20px 0;
+}
+.pokemonRow div{
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.pokemonRow img{
+    width: 100px;
+    aspect-ratio: 1/1;
+}
