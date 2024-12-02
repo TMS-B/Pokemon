@@ -10,6 +10,22 @@ ajouter bouton favoris sur chacune des fiches --> liste paginer
 
 afficher un message s'il y a une erreur dans l'api et ou si un pokemon n'existe pas 
 
+<div class="statsContainer1">
+        <h1 class="idPokemon">${pokemons[id].id}</h1>
+        <img class="pokeFace" src="${pokemons[id].image}">
+        <div class="dataPokemon">
+            <p class="statOne">HP ${pokemons[id].stats.HP}</p>
+            <p class="statOne">Attaque Special ${pokemons[id].stats.special_attack}</p>
+            <p class="statOne">Attaque ${pokemons[id].stats.attack}</p>
+            <p class="statOne">Defense Special ${pokemons[id].stats.special_defense}</p>
+            <p class="statOne">Defense ${pokemons[id].stats.defense}</p>
+            <p class="statOne">Vitesse ${pokemons[id].stats.speed}</p>
+        </div>
+        <div class="type">
+            <p class="statTwo">${pokemons[id].apiTypes[0].name}</p>
+            <img class="statTwo" src="${pokemons[id].apiTypes[0].image}">
+        </div>
+    </div>
 */
 let nextButton = document.getElementById("nextBtn");
 let previousButton = document.getElementById("previousBtn");
@@ -58,28 +74,33 @@ function showPokemon(){
     }
 }
 function pokemonStat(){
-    console.log("test")
     let id = parseInt(this.id);
     let pokemonDetails = document.createElement("div");
     pokemonDetails.innerHTML = `
-    <h1 class="idPokemon">${pokemons[id].id}</h1>
-    <div class="statsContainer1">
-        <img class="pokeFace" src="${pokemons[id].image}">
-        <div class="dataPokemon">
-            <p class="statOne">HP ${pokemons[id].stats.HP}</p>
-            <p class="statOne">Attaque Special ${pokemons[id].stats.special_attack}</p>
-            <p class="statOne">Attaque ${pokemons[id].stats.attack}</p>
-            <p class="statOne">Defense Special ${pokemons[id].stats.special_defense}</p>
-            <p class="statOne">Defense ${pokemons[id].stats.defense}</p>
-            <p class="statOne">Vitesse ${pokemons[id].stats.speed}</p>
+    <div class="overlayModalTrigger"></div>
+    <div class="cardPokemon">   
+        <button class="closeModalTrigger">X</button>
+        <div class="statsContainer">
+            
+            <div class="leftCard">
+               <h1 class="idPokemon">ID : ${pokemons[id].id}</h1>
+               <img class="pokeFace" src="${pokemons[id].image}"> 
+               <div class="type">
+                    <p class="statTwo">${pokemons[id].apiTypes[0].name}</p>
+                    <img class="statTwo" src="${pokemons[id].apiTypes[0].image}">
+                </div>
+            </div>
+            <div class="dataPokemon">
+                <p class="statOne">HP : ${pokemons[id].stats.HP}</p>
+                <p class="statOne">Attaque Special : ${pokemons[id].stats.special_attack}</p>
+                <p class="statOne">Attaque : ${pokemons[id].stats.attack}</p>
+                <p class="statOne">Defense Special : ${pokemons[id].stats.special_defense}</p>
+                <p class="statOne">Defense : ${pokemons[id].stats.defense}</p>
+                <p class="statOne">Vitesse : ${pokemons[id].stats.speed}</p>
+            </div>
         </div>
-    </div>
-    <div class="statsContainer2">
-        <div class="type">
-            <p class="statTwo">${pokemons[id].apiTypes[0].name}</p>
-            <img class="statTwo" src="${pokemons[id].apiTypes[0].image}">
-        </div>
-        <div class="evolution">
+        <hr>
+        <div class="pokemonAround">
             ${ id > 0 ? '<img class="pokemonBefore" src="'+ pokemons[id-1].image +'" alt="'+ pokemons[id-1].name +'"/>': ""}
             ${ id+1 < pokemons.length ? '<img class="pokemonAfter" src="'+ pokemons[id+1].image +'" alt="'+ pokemons[id+1].name +'"/>': ""}
         </div>

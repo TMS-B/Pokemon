@@ -116,11 +116,9 @@ button:hover{
     gap: 1em;
 }
 .detailsWindows{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 70%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
     background-color: white;
     border: solid 3px #d2232a;
     border-radius: 20px;
@@ -129,33 +127,41 @@ button:hover{
     width: 100px;
     aspect-ratio: 1/1;
 }
-.idPokemon{
+.cardPokemon{
+    width: 95%;
+    max-width: 800px;
+    min-width: 300px;
+    padding: 30px;
+    background: #fff;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.overlayModalTrigger{
+    position: absolute;
     width: 100%;
-    margin-left: 30px;
+    height: 100%;
+    background: #333333d3;
+}
+.statsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.leftCard{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
 }
 .pokeFace{
     display: flex;
     width: 100px;
     height: auto;
-}
-.statsContainer1{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-}
-.dataPokemon{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 10px;
-    grid-row-gap: 10px;
-}
-.statsContainer2{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
 }
 .type{
     display: flex;
@@ -166,4 +172,29 @@ button:hover{
 .type img{
     width: 30px;
     height: 30px;
+}
+.dataPokemon{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+    margin-left: 100px;
+}
+hr{
+    color: black;
+    width: 80%;
+}
+.pokemonAround{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 20px;
+}
+.closeModalTrigger{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
