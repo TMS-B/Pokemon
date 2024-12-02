@@ -11,57 +11,87 @@ ajouter bouton favoris sur chacune des fiches --> liste paginer
 afficher un message s'il y a une erreur dans l'api et ou si un pokemon n'existe pas 
 
 */
-
-
-// let next = document.getElementsByClassName("prevNext");
-// let best = document.getElementById("favorite");
-// let pokemon_list = document.getElementById("pokemonList");
-// let pokemon_result = document.getElementById("pokemonResult")
-// let numbersOfItems = 20;
-// let first = 0;
-
-// function nextPage(){
-//     first += numbersOfItems;
-//     showPokemon();
-// }
-
-// async function showPokemon(){
-//     let colonneContainer = document.createElement("div");
-//     const data = await searchPokemon();
-//     for(let i = first; i < first + numbersOfItems; i++){
-//         next[i].addEventListener("click", nextPage)
-//         let colonneContainer = document.createElement("div");
-//         colonneContainer.innerHTML = 
-//         `<div class= "favorite"></div>
-//         <div class= "id">${data[i].id}</div>
-//         <div class= "image"><img src="${data[i].image}" alt="${data[i].name}"/></div>
-//         <div class= "name">${data[i].name}</div>
-//         <div class= "description">${data[i].apiTypes[0].name}</div>`;
-//         colonneContainer.className = "pokemonRow"
-//         pokemon_list.appendChild(colonneContainer); 
-//     }
-// }
-
-// async function searchPokemon() {
-//     try {
-//         const res = await fetch("./pokemon.json");
-//         const json = await res.json();
-//         return json; // Retourner l'objet JSON directement
-//     } catch (error) {
-//         console.error("Erreur lors du chargement du fichier JSON", error);
-//     }
-// }
-// showPokemon();
-
-
 let nextButton = document.getElementById("nextBtn");
-let previousButton = document.getElementById("previousBtn")
+let previousButton = document.getElementById("previousBtn");
 let pokemon_list = document.getElementById("pokemonList");
+let searchInput = document.getElementById("searchBar")
 let numbersOfItems = 20;
 let firstDisplay = 0;
 let lastDisplay = firstDisplay + numbersOfItems;
 let pokemons;
+let evolutions = "";
 
+async function searchPokemon() {
+    lastDisplay = firstDisplay + numbersOfItems;
+    firstDisplay = 0;
+    try {
+        const res = await fetch("./pokemon.json");
+        const json = await res.json();
+        pokemons = json;
+    } catch (error) {
+        console.error("Erreur lors du chargement du fichier JSON", error);
+    }
+}
+
+function showPokemon(){
+    pokemon_list.innerHTML = `<div class="pokemonRow">
+                <div class="favorite">Favoris</div>
+                <div class="id">N°</div>
+                <div class="image">Img.</div>
+                <div class="name">Pokémon</div>
+                <div class="description">Type</div>
+            </div>`;
+        for (let i = firstDisplay; i < lastDisplay; i++){
+        let colonneContainer = document.createElement("div");
+        colonneContainer.id = i;
+        colonneContainer.innerHTML = 
+        `<div class="favorite">
+            <img id="starFavorite" src="./image/star.svg" alt="star favorite">
+        </div>
+        <div class="id">${pokemons[i].id}</div>
+        <div class="image"><img src="${pokemons[i].image}" alt="${pokemons[i].name}"/></div>
+        <div class="name">${pokemons[i].name}</div>
+        <div class="description">${pokemons[i].apiTypes[0].name}</div>`;
+        colonneContainer.className = "pokemonRow";
+        colonneContainer.addEventListener('click', pokemonStat)
+        pokemon_list.appendChild(colonneContainer);
+    }
+}
+function pokemonStat(){
+    console.log("test")
+    let id = parseInt(this.id);
+    let pokemonDetails = document.createElement("div");
+    pokemonDetails.innerHTML = `
+    <h1 class="idPokemon">${pokemons[id].id}</h1>
+    <div class="statsContainer1">
+        <img class="pokeFace" src="${pokemons[id].image}">
+        <div class="dataPokemon">
+            <p class="statOne">HP ${pokemons[id].stats.HP}</p>
+            <p class="statOne">Attaque Special ${pokemons[id].stats.special_attack}</p>
+            <p class="statOne">Attaque ${pokemons[id].stats.attack}</p>
+            <p class="statOne">Defense Special ${pokemons[id].stats.special_defense}</p>
+            <p class="statOne">Defense ${pokemons[id].stats.defense}</p>
+            <p class="statOne">Vitesse ${pokemons[id].stats.speed}</p>
+        </div>
+    </div>
+    <div class="statsContainer2">
+        <div class="type">
+            <p class="statTwo">${pokemons[id].apiTypes[0].name}</p>
+            <img class="statTwo" src="${pokemons[id].apiTypes[0].image}">
+        </div>
+        <div class="evolution">
+            ${ id > 0 ? '<img class="pokemonBefore" src="'+ pokemons[id-1].image +'" alt="'+ pokemons[id-1].name +'"/>': ""}
+            ${ id+1 < pokemons.length ? '<img class="pokemonAfter" src="'+ pokemons[id+1].image +'" alt="'+ pokemons[id+1].name +'"/>': ""}
+        </div>
+    </div>`;
+    pokemonDetails.className = "detailsWindows";
+    document.querySelector("main").appendChild(pokemonDetails);
+//variable dedans, le terner commence à 0, ''= immense string, : = condition de notre terner et si la condition n'est pas rempli alors c'est null -->
+}
+window.onload = async () => {
+    await searchPokemon();
+    showPokemon();
+}
 nextButton.addEventListener('click', () =>{
     if (lastDisplay < pokemons.length){
         firstDisplay += numbersOfItems;
@@ -75,38 +105,34 @@ previousButton.addEventListener('click', () =>{
         firstDisplay -= numbersOfItems;
         lastDisplay -= numbersOfItems;
         showPokemon();
-    }else {
     }
 });
 
-function showPokemon(){
-    pokemon_list.innerHTML = '';
-        for (let i = firstDisplay; i < lastDisplay; i++){
-        let colonneContainer = document.createElement("div");
-        colonneContainer.innerHTML = 
-        `<div class="favorite">
-            <img src="" alt="">
-        </div>
-        <div class="id">${pokemons[i].id}</div>
-        <div class="image"><img src="${pokemons[i].image}" alt="${pokemons[i].name}"/></div>
-        <div class="name">${pokemons[i].name}</div>
-        <div class="description">${pokemons[i].apiTypes[0].name}</div>`;
-        colonneContainer.className = "pokemonRow";
-        pokemon_list.appendChild(colonneContainer);
+searchInput.addEventListener("keyup", searchbar)
+
+async function searchbar(e) {
+    const searchString = e.target.value.toLowerCase().replace(/\s/g, "");
+    if (searchString === "" && e.keyCode != 13){
+        await searchPokemon();
+        showPokemon();
     }
-}
-window.onload = async () => {
-    await searchPokemon();
-    console.log(pokemons);
-    showPokemon();
-  };
-  
-async function searchPokemon() {
-    try {
-        const res = await fetch("https://pokebuildapi.fr/api/v1/pokemon");
-        const json = await res.json();
-        pokemons = json;
-    } catch (error) {
-        console.error("Erreur lors du chargement du fichier JSON", error);
-    }
+    if (e.keyCode != 13 || searchString === "")return;         // keycode => va traduire les touches du claviers en numerique et 13 = touche "ENTER"
+    pokemon_list.innerHTML = "";
+    fetch ("https://pokebuildapi.fr/api/v1/pokemon/"+searchString)
+    .then (data => {
+        if (data.ok){
+            return data.json();
+        }else if (data.status === 500){
+            alert("Ce Pokémon n'existe pas. Veuillez rechercher un pokémon valide. Merci. bien cordialement, l'équipe de toute l'AFEC Dax. Joyeux Noel, Hanouka, joyeuse Thanks Giving, Pâques, St Valentin. Bon carnaval de RIO !!!")
+        }
+    })
+    .then (json => {
+        pokemons = [];
+        pokemons.push(json);
+        lastDisplay = 1;
+        firstDisplay = 0;
+        showPokemon();
+    })
+    .catch ((error) => console.error("Erreur lors du chargement du fichier JSON", error))
+    
 }

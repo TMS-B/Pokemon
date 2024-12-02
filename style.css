@@ -28,7 +28,7 @@ header h2 {
     font-weight: bold;
     font-family: sans-serif;
 }
-header input {
+input {
     margin: 10px;
     height: 30px;
     width: 200px;
@@ -38,24 +38,46 @@ header input {
 input:focus{
     outline: none;
 }
+/* Permet de supprimer les fleches de l'input sur Firefox */
+#wherePage[type=number] {
+    -moz-appearance: textfield;
+}
+/* Permet de supprimer les fleches de l'input sur Chrome */
+#wherePage::-webkit-inner-spin-button,
+#wherePage::-webkit-outer-spin-button { 
+	-webkit-appearance: none;
+	margin:0;
+}
+#wherePage{
+    width: 100px;
+    text-align: center;
+    font-weight: bolder;
+}
 main{
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    background-color: green;
-    color: white;
+    background-color: #38B000;
+    /* color: white; */
+    font-weight: bold;
+    font-family: sans-serif;
     border: solid 3px black;
 }
 button{
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100px;
+    height: 35px;
     border-radius: 10px;
     background-color: #58595b;
     border: solid 3px black;
     color: white;
+}
+button:hover{
+    cursor: pointer;
 }
 .pokemonRow{
     display: flex;
@@ -72,4 +94,76 @@ button{
 .pokemonRow img{
     width: 100px;
     aspect-ratio: 1/1;
+}
+.pokemonRow:nth-child(odd){
+    background-color: #008000;
+}
+#starFavorite{
+    width: auto;
+    /* filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(298deg) brightness(102%) contrast(102%); */
+}
+#favorite{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+}
+#prevNext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    gap: 1em;
+}
+.detailsWindows{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    background-color: white;
+    border: solid 3px #d2232a;
+    border-radius: 20px;
+}
+.detailsWindows img{
+    width: 100px;
+    aspect-ratio: 1/1;
+}
+.idPokemon{
+    width: 100%;
+    margin-left: 30px;
+}
+.pokeFace{
+    display: flex;
+    width: 100px;
+    height: auto;
+}
+.statsContainer1{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.dataPokemon{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
+}
+.statsContainer2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.type{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.type img{
+    width: 30px;
+    height: 30px;
 }
