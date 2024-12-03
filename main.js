@@ -81,7 +81,6 @@ function pokemonStat(){
     <div class="cardPokemon">   
         <button class="closeModalTrigger">X</button>
         <div class="statsContainer">
-            
             <div class="leftCard">
                <h1 class="idPokemon">ID : ${pokemons[id].id}</h1>
                <img class="pokeFace" src="${pokemons[id].image}"> 
